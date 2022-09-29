@@ -71,41 +71,61 @@ void getBmpFileAsBytes(unsigned char* ptr, unsigned fileSizeInBytes, FILE* strea
 
 unsigned char getAverageIntensity(unsigned char blue, unsigned char green, unsigned char red) {
   printf("TODO: unsigned char getAverageIntensity(unsigned char blue, unsigned char green, unsigned char red)\n");
+
   return 0;
 }
 
 void applyGrayscaleToPixel(unsigned char* pixel) {
   printf("TODO: void applyGrayscaleToPixel(unsigned char* pixel)\n");
+  // TODO: call getAverageIntensity to get the new value of the pixel
+  // Each pixel in the image is converted to a gray pixel by setting all three color values equal to the average of the three original values.
+  // setting all three color values equal to the average of the three original values
 }
 
 void applyThresholdToPixel(unsigned char* pixel) {
   printf("TODO: void applyThresholdToPixel(unsigned char* pixel)\n");
+  // TODO: call getAverageIntensity to get the new value of the pixel
+  // Each pixel in the image is converted to either white or black based on the average intensity of its three color values.
+  // Pixels in the original image with an average intensity of 128 or more will become white (all colors 0xff);
+  // those with average intensities below 128 will become black (all colors 0x00).
 }
 
 void applyFilterToPixel(unsigned char* pixel, int isGrayscale) {
   printf("TODO: void applyFilterToPixel(unsigned char* pixel, int isGrayscale)\n");
+  // TODO: on each pixel, either call applyGrayscale or applyThreshold
 }
 
 void applyFilterToRow(unsigned char* row, int width, int isGrayscale) {
   printf("TODO: void applyFilterToRow(unsigned char* row, int width, int isGrayscale)\n");
+  // TODO: on each pixel in the row, call applyFilterToPixel
 }
 
 void applyFilterToPixelArray(unsigned char* pixelArray, int width, int height, int isGrayscale) {
   int padding = 0;
   printf("TODO: compute the required amount of padding from the image width");
+  // padding is just mod 4, because there are 3 bytes per pixel, do width * 3 mod 4 to get padding
+  // padding will be added to the end of each row of pixels
 
 #ifdef DEBUG
   printf("padding = %d\n", padding);
 #endif
 
   printf("TODO: void applyFilterToPixelArray(unsigned char* pixelArray, int width, int height, int isGrayscale)\n");
+  // TODO: on each row of the pixel array, call applyFilterToRow
 }
 
 void parseHeaderAndApplyFilter(unsigned char* bmpFileAsBytes, int isGrayscale) {
-  int offsetFirstBytePixelArray = 0;
-  int width = 0;
+  int offsetFirstBytePixelArray = 0;        // TODO: entry point for starting code is here
+  // located in bmp Header which is 14 bytes total
+  // offset is found 2 bytes in, it is at bytes 3-6
+  int width = 0;                            // TODO: literally just call each function moving up to do one part
+  // width = number of pixels in each row
+  // width is found in DIB header, 4 bytes into this header, so 18 bytes in total
   int height = 0;
+  // height = number of rows of pixels in the image
+  // height is found in DIB header, 8 bytes into this header, so 22 bytes in total
   unsigned char* pixelArray = NULL;
+  // each row starts on a 4-byte aligned address boundary
 
   printf("TODO: set offsetFirstBytePixelArray\n");
   printf("TODO: set width\n");
